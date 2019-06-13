@@ -439,14 +439,14 @@ body.mdc-dialog-scroll-lock > #wrapper {
     filter: none;
 }
 .mod.mod-dt label::before {
-    background-image: url("images/ompp/dt.png");
+    background-image: url("../images/ompp/dt.png");
 }
 .mod.mod-ez label::before {
-    background-image: url("images/ompp/ez.png");
+    background-image: url("../images/ompp/ez.png");
 }
 .mod.mod-ht label::before {
-    background-image: url("images/ompp/ht.png");
+    background-image: url("../images/ompp/ht.png");
 }
 .mod.mod-nf label::before {
-    background-image: url("images/ompp/nf.png");
+    background-image: url("../images/ompp/nf.png");
 }
