@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <!-- meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google" content="notranslate">
+
+    <!-- title -->
+    <title>osu!mania pp Calculator</title>
+
+    <!-- icon -->
+    <link rel="shortcut icon" type="image/png" href="/ompp.png"/>
+
+    <!-- theme color for chrome android -->
+    <meta name="theme-color" content="#2196F3">
+
+    <!-- fonts -->
+    <link rel='stylesheet prefetch' href="https://fonts.googleapis.com/css?family=Roboto" />
+    <link rel='stylesheet prefetch' href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" />
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/css/material.teal-blue.min.css" />
+    <link rel="stylesheet" href="/css/material-components-web.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/ompp.css?v=1.2" />
+
+    <!-- scripts -->
+    <script type="text/javascript" src="/js/material-components-web.min.js"></script>
+    <script type="text/javascript" src="/js/ompp.js?v=1.2"></script>
+</head>
+
+<body id="body">
+
+    <aside id="msg-dialog" class="mdc-dialog mdc-dialog mdc-elevation--z6">
+        <div class="mdc-dialog__surface">
+            <header class="mdc-dialog__header">
+                <h2 id="msg-title" class="mdc-dialog__header__title">
+                    title
+                </h2>
+            </header>
+            <section id="msg" class="mdc-dialog__body">
+                content
+            </section>
+            <footer class="mdc-dialog__footer">
+                <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">ok</button>
+            </footer>
+        </div>
+        <div class="mdc-dialog__backdrop"></div>
+    </aside>
+
+    <aside id="file-dialog" class="mdc-dialog mdc-dialog mdc-elevation--z6">
+        <div class="mdc-dialog__surface">
+            <header class="mdc-dialog__header">
+                <h2 id="file-dialog-title" class="mdc-dialog__header__title">
+                    Load beatmap from path
+                </h2>
+            </header>
+            <section id="file-dialog-body" class="mdc-dialog__body">
+                Try dragging a file here!
+                <span id="file-box">
+                    <label id="file-button" for="file-input" class="mdc-button mdc-button--raised gray-button">open file</label>
+                    <input id="file-input" name="osu-file" type="file" class="file-upload form-control" accept=".osu" style="display: none;"/>
+                    <label id="filename">No .osu file selected</label>
+                </span>
+                Alternatively, you can load the file from an osu! link or beatmap ID:
+                <div class="mdc-text-field">
+                    <input id="url-field" type="text" name="url" class="mdc-text-field__input" autocomplete="off" maxlength="64" tabindex="1"></input>
+                    <label for="url-field" class="mdc-floating-label">URL / ID</label>
+                    <div class="mdc-line-ripple"></div>
+                </div>
+            </section>
+            <footer class="mdc-dialog__footer">
+                <button id="load-button" type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">load</button>
+                <button id="cancel-button" type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">cancel</button>
+            </footer>
+        </div>
+        <div class="mdc-dialog__backdrop"></div>
+    </aside>
+
+    <div id="wrapper">
+        <h1 class="content-title">osu!mania pp Calculator v1.2</h1>
+        <div id="content" class="row">
+            <div class="col-lg-3"></div>
+            <div id="content-card" class="col-lg-6">
+                <p>Calculate your osu!mania pp by filling in the values(with mods applied) below.
+                    <div>
+                        <a id="open-file-link" href="javascript:void(0)">
+                            Load .osu from file / URL
+                        </a>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mdc-text-field">
+                                <input id="od-field" type="number" name="od" max="10" min="0" step="0.1" class="mdc-text-field__input" autocomplete="off" maxlength="64" tabindex="1"></input>
+                                <label for="od-field" class="mdc-floating-label">OD</label>
+                                <div class="mdc-line-ripple"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mdc-text-field">
+                                <input id="n-field" type="number" name="n" min="0" step="1" class="mdc-text-field__input" autocomplete="off" maxlength="64" tabindex="2"></input>
+                                <label for="n-field" class="mdc-floating-label">Object count</label>
+                                <div class="mdc-line-ripple"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mdc-text-field">
+                                <input id="stars-field" type="number" name="stars" min="0" step="0.01" class="mdc-text-field__input" autocomplete="off" maxlength="64"></input>
+                                <label for="stars-field" class="mdc-floating-label">Stars</label>
+                                <div class="mdc-line-ripple"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mdc-text-field">
+                                <input id="score-field" type="number" name="score" max="1000000" min="0" step="1" class="mdc-text-field__input" autocomplete="off" maxlength="64"></input>
+                                <label for="score-field" class="mdc-floating-label">Score</label>
+                                <div class="mdc-line-ripple"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="mods" class="mods">
+                        <div class="mod mod-dt">
+                            <input type="checkbox" id="mod-dt" value="dt">
+                            <label for="mod-dt" data-t="mod-dt">Double Time</label>
+                        </div>
+                        <div class="mod mod-ez">
+                            <input type="checkbox" id="mod-ez" value="ez">
+                            <label for="mod-ez" data-t="mod-ez">Easy</label>
+                        </div>
+                        <div class="mod mod-nf">
+                            <input type="checkbox" id="mod-nf" value="nf">
+                            <label for="mod-nf" data-t="mod-nf">No Fail</label>
+                        </div>
+                        <div class="mod mod-ht">
+                            <input type="checkbox" id="mod-ht" value="ht">
+                            <label for="mod-ht" data-t="mod-ht">Half Time</label>
+                        </div>
+                    </div>
+                    <button id="calculate-button" type="button" class="mdc-button mdc-button--raised blue-button">calculate!</button>
+                    <button id="info-button" type="button" class="mdc-button blue-button">info</button>
+                    <br>
+                    <label id="results">That's about NaN pp.</label>
+                <footer id="footer">
+                    <hr>
+                    <div class="footer-list">
+                        <a href="mailto:kent05011607@gmail.com" target="_blank">Email</a>
+                        <a href="https://discordapp.com/users/468420931812065281" target="_blank">Discord</a>
+                        <a href="https://github.com/toxicpie/ompp-web" target="_blank">Source code</a>
+                    </div>
+                    <p>
+                        Made with passion by Kent H. / toxicpie. This project is open-sourced under the MIT License.
+                    </p>
+                </footer>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>
